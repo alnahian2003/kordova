@@ -1,9 +1,11 @@
 <script setup>
+import SiteSelector from "@/Components/SiteSelector.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 
 defineProps({
     site: Object,
+    sites: Array,
 });
 </script>
 
@@ -12,11 +14,15 @@ defineProps({
 
     <AuthenticatedLayout>
         <template #header>
-            <h2
-                class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight"
-            >
-                Dashboard
-            </h2>
+            <div class="flex justify-between items-center">
+                <h2
+                    class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight"
+                >
+                    Dashboard
+                </h2>
+
+                <div><SiteSelector :sites="sites" /></div>
+            </div>
         </template>
 
         <div class="py-12">

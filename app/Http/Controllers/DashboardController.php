@@ -12,6 +12,9 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request, Site $site)
     {
-        return inertia()->render('Dashboard', compact('site'));
+        return inertia()->render('Dashboard', [
+            'site' => $site,
+            'sites' => Site::get()
+        ]);
     }
 }
