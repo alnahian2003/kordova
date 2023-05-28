@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->has(Site::factory()->count(5))
             ->create([
-                'name' => 'Al Nahian',
+                'name'  => 'Al Nahian',
                 'email' => 'admin@admin.com',
-            ]);;
+            ]);
     }
 }
