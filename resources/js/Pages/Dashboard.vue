@@ -21,7 +21,7 @@ defineProps({
                     Dashboard
                 </h2>
 
-                <div><SiteSelector :sites="sites" /></div>
+                <div><SiteSelector :sites="sites.data" /></div>
             </div>
         </template>
 
