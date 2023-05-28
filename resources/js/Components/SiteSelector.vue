@@ -1,12 +1,17 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
+import { ref } from "vue";
+import { VueFinalModal } from "vue-final-modal";
 
 defineProps({
     sites: Array,
 });
+
+const ShowNewSiteModal = ref(false);
 </script>
 <template>
-    <VDropdown :distance="10">
+    <VDropdown :distance="16">
         <button
             class="flex flex-row items-center space-x-2 text-xs text-gray-500"
         >
@@ -25,7 +30,7 @@ defineProps({
             </svg>
         </button>
 
-        <template #popper>
+        <template #popper="{ hide }">
             <ul class="divide-y dark:divide-gray-600 dark:bg-gray-700">
                 <li v-for="site in sites">
                     <Link
@@ -36,14 +41,26 @@ defineProps({
                 </li>
                 <slot name="addSite">
                     <li>
-                        <Link
-                            class="px-4 border-t dark:border-t-gray-600 py-2 block text-indigo-500 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-600 hover:text-gray-700 dark:hover:text-indigo-300 text-sm font-semibold text-center"
-                            href="/"
-                            >Add a site</Link
+                        <SecondaryButton
+                            @click="
+                                ShowNewSiteModal = true;
+                                hide();
+                            "
+                            class="w-full justify-center px-4 border-t dark:border-t-gray-600 py-2 text-indigo-500 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-600 hover:text-gray-700 dark:hover:text-indigo-300 text-sm font-semibold text-center"
+                            >Add a site</SecondaryButton
                         >
                     </li>
                 </slot>
             </ul>
         </template>
     </VDropdown>
+
+    <VueFinalModal
+        v-model="ShowNewSiteModal"
+        classes="flex justify-center items-center pt-16 md:pt-24 mx-4"
+        content-class="relative max-h-full rounded bg-white w-full max-w-2xl p-4 md:p-6"
+        overlay-class="bg-gradient-to-r from-gray-800 to-gray-500 opacity-50"
+        :esc-to-close="true"
+        >Hey</VueFinalModal
+    >
 </template>
