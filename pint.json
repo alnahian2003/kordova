@@ -3,5 +3,7 @@
         "binary_operator_spaces": {
             "default": "align_single_space_minimal"
         }
-    }
+    },
+
+    "exclude": ["app/Enums"]
 }
