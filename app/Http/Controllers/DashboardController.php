@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $site->update(['default' => true]);
 
         // If the site does not exist
-        if (!$site->exists) {
+        if (! $site->exists) {
             // Retrieve the default site belonging to the authenticated user, if available
             $site = $request->user()->sites()
                 ->orderBy('updated_at', 'desc')

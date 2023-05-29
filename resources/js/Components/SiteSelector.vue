@@ -1,14 +1,33 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import { ref } from "vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
+import InputError from "@/Components/InputError.vue";
+
+import { Link, useForm } from "@inertiajs/vue3";
 import { VueFinalModal } from "vue-final-modal";
+import { ref } from "vue";
 
 defineProps({
-    sites: Array,
+    sites: Object,
 });
 
 const ShowNewSiteModal = ref(false);
+
+const siteForm = useForm({
+    domain: "",
+});
+
+const createSite = () => {
+    siteForm.post("/sites", {
+        preserveScroll: true,
+        onSuccess: () => {
+            siteForm.reset();
+            ShowNewSiteModal.value = false;
+        },
+    });
+};
 </script>
 <template>
     <VDropdown :distance="16">
@@ -57,10 +76,31 @@ const ShowNewSiteModal = ref(false);
 
     <VueFinalModal
         v-model="ShowNewSiteModal"
-        classes="flex justify-center items-center pt-16 md:pt-24 mx-4"
-        content-class="relative max-h-full rounded bg-white w-full max-w-2xl p-4 md:p-6"
+        classes="flex justify-center items-center pt-16 mx-4"
+        content-class="relative max-h-full rounded bg-white dark:bg-gray-800 dark:text-gray-100 w-full max-w-2xl p-4 md:p-6"
         overlay-class="bg-gradient-to-r from-gray-800 to-gray-500 opacity-50"
         :esc-to-close="true"
-        >Hey</VueFinalModal
     >
+        <h2
+            class="font-semibold text-lg text-gray-800 dark:text-gray-100 leading-tight"
+        >
+            Add a site
+        </h2>
+
+        <form @submit.prevent="createSite" class="space-y-4">
+            <InputLabel for="domain" value="Domain" class="sr-only" />
+            <TextInput
+                id="domain"
+                type="text"
+                placeholder="e.g. https://varve.netlify.app"
+                v-model="siteForm.domain"
+                :class="{
+                    'block w-full py-4 text-sm': true,
+                    'border-red-500 dark:border-red-500': siteForm.errors.domain,
+                }"
+            />
+            <InputError :message="siteForm.errors.domain" />
+            <PrimaryButton>Add</PrimaryButton>
+        </form>
+    </VueFinalModal>
 </template>

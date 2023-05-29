@@ -3,12 +3,18 @@
 namespace App\Observers;
 
 use App\Models\Site;
+use Illuminate\Support\Arr;
 
 class SiteObserver
 {
-    /**
-     * Handle the Site "updating" event.
-     */
+    public function creating(Site $site): void
+    {
+        $parsed = parse_url($site->domain);
+
+        $site->scheme = Arr::get($parsed, 'scheme');
+        $site->domain = Arr::get($parsed, 'host');
+    }
+
     public function updating(Site $site): void
     {
         // Is The Site Being Updated To Set Default To True?
