@@ -32,7 +32,6 @@ class DashboardController extends Controller
         return inertia()->render('Dashboard', [
             'site'  => SiteResource::make($site),
             'sites' => SiteResource::collection(Site::get()),
-            'endpointFrequencies' => EndpointFrequency::collection(EndpointFrequency::cases())
         ]);
     }
 }
