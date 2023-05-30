@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EndpointFrequency as EnumsEndpointFrequency;
+use App\Http\Resources\EndpointFrequency;
 use App\Http\Resources\SiteResource;
 use App\Models\Site;
 use Illuminate\Http\Request;
@@ -17,7 +19,7 @@ class DashboardController extends Controller
         $site->update(['default' => true]);
 
         // If the site does not exist
-        if (! $site->exists) {
+        if (!$site->exists) {
             // Retrieve the default site belonging to the authenticated user, if available
             $site = $request->user()->sites()
                 ->orderBy('updated_at', 'desc')
@@ -30,6 +32,7 @@ class DashboardController extends Controller
         return inertia()->render('Dashboard', [
             'site'  => SiteResource::make($site),
             'sites' => SiteResource::collection(Site::get()),
+            'endpointFrequencies' => EndpointFrequency::collection(EndpointFrequency::cases())
         ]);
     }
 }
