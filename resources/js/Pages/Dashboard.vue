@@ -3,6 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import SiteSelector from "@/Components/SiteSelector.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
+import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 import { Head, usePage, useForm } from "@inertiajs/vue3";
@@ -68,6 +69,10 @@ const storeEndpoint = () => {
                             type="text"
                             placeholder="e.g. /about, /playground, /contact"
                             v-model="endpointForm.location"
+                        />
+                        <InputError
+                            class="mt-2"
+                            :message="endpointForm.errors.location"
                         />
                     </div>
                     <div>

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EndpointStoreRequest;
 use App\Models\Site;
-use Illuminate\Http\Request;
 
 class EndpointStoreController extends Controller
 {
@@ -12,7 +12,7 @@ class EndpointStoreController extends Controller
         $this->middleware('auth');
     }
 
-    public function __invoke(Request $request, Site $site)
+    public function __invoke(EndpointStoreRequest $request, Site $site)
     {
         $endpoint = $site->endpoints()->create($request->only('location', 'frequency'));
 
