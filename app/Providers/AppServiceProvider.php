@@ -3,8 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Http\Resources\EndpointFrequency;
-use App\Enums\EndpointFrequencyEnums;
 
 class AppServiceProvider extends ServiceProvider
 {

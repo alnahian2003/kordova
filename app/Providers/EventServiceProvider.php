@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Endpoint;
 use App\Models\Site;
+use App\Observers\EndpointObserver;
 use App\Observers\SiteObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -23,7 +25,8 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     protected $observers = [
-        Site::class => [SiteObserver::class],
+        Site::class     => [SiteObserver::class],
+        Endpoint::class => [EndpointObserver::class],
     ];
 
     /**

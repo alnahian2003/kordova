@@ -16,7 +16,7 @@ class EndpointFrequency extends JsonResource
     {
         return [
             'frequency' => $this->value,
-            'label' => $this->label()
+            'label'     => $this->label(),
         ];
     }
 }

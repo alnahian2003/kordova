@@ -5,14 +5,28 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
-import { Head, usePage } from "@inertiajs/vue3";
+import { Head, usePage, useForm } from "@inertiajs/vue3";
 
-defineProps({
+const props = defineProps({
     site: Object,
     sites: Object,
 });
 
 const page = usePage();
+
+const endpointForm = useForm({
+    location: "",
+    frequency: page.props.endpointFrequencies.data[0].frequency,
+});
+
+const storeEndpoint = () => {
+    endpointForm.post(`/sites/${props.site.data.id}/endpoints`, {
+        preserveScroll: true,
+        onSuccess: () => {
+            endpointForm.reset();
+        },
+    });
+};
 </script>
 
 <template>
@@ -26,27 +40,21 @@ const page = usePage();
                 >
                     {{ site.data.domain }}
                 </h2>
-
-                <div><SiteSelector :sites="sites.data" /></div>
+                <div><SiteSelector :sites="props.sites.data" /></div>
             </div>
         </template>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <!-- <div
-                    class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg"
+                <h2
+                    class="text-lg font-semibold text-gray-700 dark:text-gray-300 leading-tight"
                 >
-                    <div class="p-6 text-gray-900 dark:text-gray-100">
-                        You're logged in and here's your site: {{ site.data }}
-                    </div>
-                </div> -->
-
-                <h2 class="text-lg font-semibold text-gray-800 leading-tight">
                     New endpoint
                 </h2>
 
                 <form
-                    class="flex gap-2 bg-white overflow-hidden shadow-sm sm:rounded-lg items-start p-3 mt-4 space-x-2"
+                    @submit.prevent="storeEndpoint"
+                    class="flex bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg items-start p-3 mt-4 space-x-2"
                 >
                     <div class="grow">
                         <InputLabel
@@ -58,7 +66,8 @@ const page = usePage();
                             id="location"
                             class="block w-full border text-sm h-9"
                             type="text"
-                            placeholder="e.g. /about"
+                            placeholder="e.g. /about, /playground, /contact"
+                            v-model="endpointForm.location"
                         />
                     </div>
                     <div>
@@ -70,7 +79,8 @@ const page = usePage();
                         <select
                             name="frequency"
                             id="frequency"
-                            class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm h-9 leading-none text-sm"
+                            class="dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm h-9 leading-none text-sm"
+                            v-model="endpointForm.frequency"
                         >
                             <option
                                 :value="frequency.frequency"

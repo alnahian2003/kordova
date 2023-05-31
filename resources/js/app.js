@@ -9,10 +9,10 @@ import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 import FloatingVue from "floating-vue";
 
 const appName =
-    window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
+    window.document.getElementsByTagName("title")[0]?.innerText || "Kordova";
 
 createInertiaApp({
-    title: (title) => `${title} | ${appName}`,
+    title: (title) => `${title} | ${appName} - Simplifying Uptime Monitoring`,
     resolve: (name) =>
         resolvePageComponent(
             `./Pages/${name}.vue`,

@@ -2,11 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use Inertia\Middleware;
-use Tightenco\Ziggy\Ziggy;
-use Illuminate\Http\Request;
 use App\Enums\EndpointFrequencyEnums;
 use App\Http\Resources\EndpointFrequency;
+use Illuminate\Http\Request;
+use Inertia\Middleware;
+use Tightenco\Ziggy\Ziggy;
 
 class HandleInertiaRequests extends Middleware
 {
