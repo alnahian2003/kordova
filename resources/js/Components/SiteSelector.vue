@@ -32,7 +32,7 @@ const createSite = () => {
 <template>
     <VDropdown :distance="16">
         <button
-            class="flex flex-row items-center space-x-2 text-xs text-gray-500"
+            class="flex flex-row items-center space-x-2 text-xs text-gray-400"
         >
             Select a site
             <svg

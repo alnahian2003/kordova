@@ -29,7 +29,6 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard/{site?}', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::post('/sites', SiteStoreController::class);
 Route::post('sites/{site}/endpoints', EndpointStoreController::class);
 
