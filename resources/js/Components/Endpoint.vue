@@ -59,12 +59,12 @@ const deleteEndpoint = () => {
         >
             <template v-if="editing">
                 <InputLabel
-                    for="location"
+                    for="inline-location"
                     value="Location"
                     class="sr-only my-2"
                 />
                 <TextInput
-                    id="location"
+                    id="inline-location"
                     class="block w-full border text-sm h-9"
                     type="text"
                     placeholder="e.g. /contact"
@@ -81,10 +81,14 @@ const deleteEndpoint = () => {
             class="whitespace-nowrap px-3 text-sm text-gray-500 dark:text-gray-300 w-64"
         >
             <template v-if="editing">
-                <InputLabel for="frequency" value="Frequency" class="sr-only" />
+                <InputLabel
+                    for="inline-frequency"
+                    value="Frequency"
+                    class="sr-only"
+                />
                 <select
                     name="frequency"
-                    id="frequency"
+                    id="inline-frequency"
                     class="dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm h-9 leading-none text-sm"
                     v-model="editForm.frequency"
                 >
