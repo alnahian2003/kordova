@@ -1,15 +1,41 @@
 <script setup>
-import { Link, router, usePage } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { Link, router, usePage, useForm } from "@inertiajs/vue3";
+import { ref, watch } from "vue";
 
 import TextInput from "@/Components/TextInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 
 const props = defineProps({ endpoint: Object });
+const editing = ref(false);
 
 const page = usePage();
+const editForm = useForm({
+    location: props.endpoint.location,
+    frequency: props.endpoint.frequency_value,
+});
 
-const editing = ref(false);
+// Native alternative to lodash.debounce
+const debounce = (func, wait, immediate) => {
+    let timeout;
+    return function () {
+        let context = this,
+            args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        }, wait);
+        if (immediate && !timeout) func.apply(context, args);
+    };
+};
+
+watch(editForm, () => {
+    editEndpoint();
+});
+
+const editEndpoint = debounce(() => {
+    console.log("yo");
+}, 500);
 
 const deleteEndpoint = () => {
     router.delete(`/endpoints/${props.endpoint.id}`, {
@@ -37,7 +63,7 @@ const deleteEndpoint = () => {
                     class="block w-full border text-sm h-9"
                     type="text"
                     placeholder="e.g. /contact"
-                    v-model="endpoint.location"
+                    v-model="editForm.location"
                 />
             </template>
             <template v-else>
@@ -55,6 +81,7 @@ const deleteEndpoint = () => {
                     name="frequency"
                     id="frequency"
                     class="dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm h-9 leading-none text-sm"
+                    v-model="editForm.frequency"
                 >
                     <option
                         :value="frequency.frequency"
