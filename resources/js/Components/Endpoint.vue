@@ -29,12 +29,17 @@ const debounce = (func, wait, immediate) => {
     };
 };
 
-watch(editForm, () => {
-    editEndpoint();
-});
+watch(
+    () => editForm.isDirty,
+    () => {
+        editEndpoint();
+    }
+);
 
 const editEndpoint = debounce(() => {
-    console.log("yo");
+    editForm.put(`/endpoints/${props.endpoint.id}`, {
+        preserveScroll: true,
+    });
 }, 500);
 
 const deleteEndpoint = () => {

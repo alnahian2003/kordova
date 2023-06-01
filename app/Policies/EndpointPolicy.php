@@ -7,6 +7,13 @@ use App\Models\User;
 
 class EndpointPolicy
 {
+    public function update(User $user, Endpoint $endpoint): bool
+    {
+        // Check if the user owns the site
+        // If the user's ID matches the ID of the site's owner, give permission to update
+        return $endpoint->site->user_id === $user->id;
+    }
+
     public function delete(User $user, Endpoint $endpoint): bool
     {
         // Check if the user owns the site
