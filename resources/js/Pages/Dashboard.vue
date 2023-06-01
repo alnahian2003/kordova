@@ -107,7 +107,7 @@ const storeEndpoint = () => {
                     <h2
                         class="font-semibold text-lg text-gray-800 dark:text-gray-200 leading-tight"
                     >
-                        Currently monitoring (0)
+                        Currently monitoring ({{ endpoints.data.length }})
                     </h2>
                     <div
                         class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8 mt-3"

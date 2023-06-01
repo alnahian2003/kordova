@@ -1,7 +1,16 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 
-defineProps({ endpoint: Object });
+const props = defineProps({ endpoint: Object });
+
+const deleteEndpoint = () => {
+    router.delete(`/endpoints/${props.endpoint.id}`, {
+        preserveScroll: true,
+        onBefore: () => {
+            return confirm("are you fucking sure, mate?");
+        },
+    });
+};
 </script>
 
 <template>
@@ -41,7 +50,12 @@ defineProps({ endpoint: Object });
         <td
             class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 w-16"
         >
-            <button class="text-red-500 hover:text-red-600">Delete</button>
+            <button
+                @click="deleteEndpoint"
+                class="text-red-500 hover:text-red-600"
+            >
+                Delete
+            </button>
         </td>
     </tr>
 </template>
