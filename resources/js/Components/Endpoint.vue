@@ -107,12 +107,30 @@ const deleteEndpoint = () => {
         <td
             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300"
         >
-            Last check
+            <template v-if="endpoint.latest_check">
+                <time :datetime="endpoint.latest_check.created_at.datetime" :title="endpoint.latest_check.created_at.datetime">{{
+                    endpoint.latest_check.created_at.human
+                }}</time>
+            </template>
+            <template v-else> - </template>
         </td>
         <td
             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300"
         >
-            Status
+            <template v-if="endpoint.latest_check">
+                <span
+                    class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300"
+                    :class="{
+                        'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300':
+                            endpoint.latest_check.is_successful,
+                        'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300':
+                            !endpoint.latest_check.is_successful,
+                    }"
+                    >{{ endpoint.latest_check.response_code }}
+                    {{ endpoint.latest_check.status_text }}</span
+                >
+            </template>
+            <template v-else> - </template>
         </td>
         <td
             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300"
