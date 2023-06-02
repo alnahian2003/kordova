@@ -108,9 +108,11 @@ const deleteEndpoint = () => {
             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300"
         >
             <template v-if="endpoint.latest_check">
-                <time :datetime="endpoint.latest_check.created_at.datetime" :title="endpoint.latest_check.created_at.datetime">{{
-                    endpoint.latest_check.created_at.human
-                }}</time>
+                <time
+                    :datetime="endpoint.latest_check.created_at.datetime"
+                    :title="endpoint.latest_check.created_at.datetime"
+                    >{{ endpoint.latest_check.created_at.human }}</time
+                >
             </template>
             <template v-else> - </template>
         </td>
@@ -135,7 +137,10 @@ const deleteEndpoint = () => {
         <td
             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300"
         >
-            x%
+            <template v-if="endpoint.uptime_percentage !== null">
+                {{ endpoint.uptime_percentage }}%
+            </template>
+            <template v-else>-</template>
         </td>
         <td
             @click="editing = !editing"
