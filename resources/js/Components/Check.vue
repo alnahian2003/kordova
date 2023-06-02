@@ -31,7 +31,7 @@ const ShowResponseBodyModal = ref(false);
 
     <VueFinalModal
         v-model="ShowResponseBodyModal"
-        classes="flex justify-center items-center pt-16 mx-4"
+        classes="flex justify-center items-center pt-16 mx-4 backdrop-blur"
         content-class="relative max-h-full rounded bg-white dark:bg-gray-800 dark:text-gray-100 w-full max-w-2xl p-4 md:p-6 space-y-4"
         overlay-class="bg-gradient-to-r from-gray-800 to-gray-500 opacity-50"
         :esc-to-close="true"

@@ -76,8 +76,8 @@ const createSite = () => {
 
     <VueFinalModal
         v-model="ShowNewSiteModal"
-        classes="flex justify-center items-center pt-16 mx-4"
-        content-class="relative max-h-full rounded bg-white dark:bg-gray-800 dark:text-gray-100 w-full max-w-2xl p-4 md:p-6"
+        classes="flex justify-center items-center pt-16 mx-4 backdrop-blur-sm"
+        content-class="relative max-h-full rounded bg-white dark:bg-gray-800 dark:text-gray-100 w-full max-w-xl p-4 md:p-6"
         overlay-class="bg-gradient-to-r from-gray-800 to-gray-500 opacity-50"
         :esc-to-close="true"
     >
@@ -96,7 +96,8 @@ const createSite = () => {
                 v-model="siteForm.domain"
                 :class="{
                     'block w-full py-2 text-sm': true,
-                    'border-red-500 dark:border-red-500': siteForm.errors.domain,
+                    'border-red-500 dark:border-red-500':
+                        siteForm.errors.domain,
                 }"
             />
             <InputError :message="siteForm.errors.domain" />
