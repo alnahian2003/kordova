@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\EndpointFrequency;
+use App\Enums\EndpointFrequencyEnums;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('site_id')->constrained()->cascadeOnDelete();
             $table->string('location');
-            $table->unsignedInteger('frequency')->default(EndpointFrequency::FIVE_MINUTE->value); // in seconds
+            $table->unsignedInteger('frequency')->default(EndpointFrequencyEnums::FIVE_MINUTE->value); // in seconds
             $table->timestamp('next_check');
             $table->timestamps();
         });

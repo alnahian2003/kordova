@@ -4,6 +4,7 @@ import { ref, watch } from "vue";
 
 import TextInput from "@/Components/TextInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
+import StatusBadge from "@/Components/StatusBadge.vue";
 
 const props = defineProps({ endpoint: Object });
 const editing = ref(false);
@@ -72,7 +73,10 @@ const deleteEndpoint = () => {
                 />
             </template>
             <template v-else>
-                <Link href="/" class="text-indigo-500 hover:text-indigo-600">
+                <Link
+                    :href="`/endpoints/${endpoint.id}`"
+                    class="text-indigo-500 hover:text-indigo-600"
+                >
                     {{ endpoint.location }}
                 </Link>
             </template>
@@ -120,17 +124,7 @@ const deleteEndpoint = () => {
             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300"
         >
             <template v-if="endpoint.latest_check">
-                <span
-                    class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300"
-                    :class="{
-                        'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300':
-                            endpoint.latest_check.is_successful,
-                        'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300':
-                            !endpoint.latest_check.is_successful,
-                    }"
-                    >{{ endpoint.latest_check.response_code }}
-                    {{ endpoint.latest_check.status_text }}</span
-                >
+                <StatusBadge :check="endpoint.latest_check" />
             </template>
             <template v-else> - </template>
         </td>

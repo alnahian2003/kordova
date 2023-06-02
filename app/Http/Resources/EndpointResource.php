@@ -22,6 +22,9 @@ class EndpointResource extends JsonResource
             'frequency_value'   => EndpointFrequencyEnums::from($this->frequency)->value,
             'latest_check'      => CheckResource::make($this->check),
             'uptime_percentage' => $this->uptimePercentage(),
+            'url'               => $this->url(),
+            'site'              => SiteResource::make($this->site),
+            'checks'            => CheckResource::collection($this->checks),
         ];
     }
 }

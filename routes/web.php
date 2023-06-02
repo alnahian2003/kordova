@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EndpointDestroyController;
+use App\Http\Controllers\EndpointIndexController;
 use App\Http\Controllers\EndpointStoreController;
 use App\Http\Controllers\EndpointUpdateController;
 use App\Http\Controllers\ProfileController;
@@ -34,6 +35,7 @@ Route::get('/dashboard/{site?}', DashboardController::class)->middleware(['auth'
 Route::post('/sites', SiteStoreController::class);
 Route::post('sites/{site}/endpoints', EndpointStoreController::class);
 
+Route::get('/endpoints/{endpoint}', EndpointIndexController::class);
 Route::put('/endpoints/{endpoint}', EndpointUpdateController::class);
 Route::delete('/endpoints/{endpoint}', EndpointDestroyController::class);
 
