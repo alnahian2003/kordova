@@ -13,9 +13,11 @@ class Site extends Model
 
     protected $fillable = ['user_id', 'default', 'domain', 'scheme'];
 
+    protected $casts = ['notification_emails' => 'array'];
+
     public function url()
     {
-        return $this->scheme.'://'.$this->domain;
+        return $this->scheme . '://' . $this->domain;
     }
 
     public function user(): BelongsTo
