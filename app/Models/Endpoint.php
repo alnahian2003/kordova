@@ -14,7 +14,9 @@ class Endpoint extends Model
 
     protected $fillable = ['location', 'frequency', 'next_check'];
 
-    public $dates = ['next_check'];
+    protected $casts = [
+        'next_check' => 'datetime',
+    ];
 
     /**
      * Get the full url from an endpoint
