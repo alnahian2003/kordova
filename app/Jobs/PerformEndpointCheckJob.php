@@ -4,18 +4,25 @@ namespace App\Jobs;
 
 use App\Models\Endpoint;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
 
-class PerformEndpointCheckJob
+class PerformEndpointCheckJob implements ShouldQueue, ShouldBeUnique
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public function __construct(public Endpoint $endpoint)
     {
         //
+    }
+
+    public function uniqid(): string
+    {
+        return 'endpoint_'.$this->endpoint->id;
     }
 
     public function handle(): void
