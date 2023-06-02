@@ -95,7 +95,7 @@ const createSite = () => {
                 placeholder="e.g. https://varve.netlify.app"
                 v-model="siteForm.domain"
                 :class="{
-                    'block w-full py-4 text-sm': true,
+                    'block w-full py-2 text-sm': true,
                     'border-red-500 dark:border-red-500': siteForm.errors.domain,
                 }"
             />
