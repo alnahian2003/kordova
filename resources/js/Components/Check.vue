@@ -9,16 +9,18 @@ const ShowResponseBodyModal = ref(false);
 </script>
 
 <template>
-    <tr>
+    <tr class="bg-white dark:bg-gray-800">
         <td
-            class="whitespace-nowrap py-4 pl-4 sm:pl-6 px-3 text-sm font-medium text-gray-900"
+            class="whitespace-nowrap py-4 pl-4 sm:pl-6 px-3 text-sm font-medium text-gray-900 dark:text-gray-100"
         >
             {{ check.created_at.datetime }}
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <StatusBadge :check="check" />
         </td>
-        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+        <td
+            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-100 font-semibold"
+        >
             <template v-if="check.response_body">
                 <button @click="ShowResponseBodyModal = true">View</button>
             </template>
@@ -40,7 +42,7 @@ const ShowResponseBodyModal = ref(false);
             Response Body
         </h2>
         <textarea
-            class="w-full block rounded border border-gray-300 outline-none"
+            class="w-full block rounded border border-gray-300 outline-none dark:bg-gray-600 dark:text-gray-200"
             rows="20"
             :value="check.response_body"
             readonly

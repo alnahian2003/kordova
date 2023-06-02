@@ -12,7 +12,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head :title="endpoint.data.url" />
 
     <AuthenticatedLayout>
         <template #header>
@@ -37,9 +37,11 @@ const props = defineProps({
                         />
                     </svg>
                 </Link>
-                <h2 class="font-semibold text-xl text-gray-8700 leading-tight">
+                <h2
+                    class="font-semibold text-xl text-gray-8700 leading-tight overflow-hidden"
+                >
                     <a
-                        class="text-indigo-600"
+                        class="text-indigo-600 dark:text-indigo-500"
                         :href="endpoint.data.url"
                         target="_blank"
                         >{{ endpoint.data.url }}</a
@@ -63,7 +65,7 @@ const props = defineProps({
 
                     <template v-else>
                         <h2
-                            class="font-semibold text-lg text-gray-800 leading-tight"
+                            class="font-semibold text-lg text-gray-800 dark:text-gray-200 leading-tight"
                         >
                             Checks
                         </h2>
@@ -78,32 +80,34 @@ const props = defineProps({
                                     class="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
                                 >
                                     <table
-                                        class="min-w-full table-fixed divide-y divide-gray-300"
+                                        class="min-w-full table-auto divide-y divide-gray-300"
                                     >
-                                        <thead class="bg-gray-50">
+                                        <thead
+                                            class="bg-gray-50 dark:bg-gray-600"
+                                        >
                                             <tr>
                                                 <th
                                                     scope="col"
-                                                    class="min-w-[12rem] pl-4 py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                                                    class="min-w-[12rem] pl-4 py-3.5 px-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-50 sm:pl-6"
                                                 >
                                                     Checked at
                                                 </th>
                                                 <th
                                                     scope="col"
-                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-50"
                                                 >
                                                     Response code
                                                 </th>
                                                 <th
                                                     scope="col"
-                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-50"
                                                 >
                                                     Response body
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody
-                                            class="divide-y divide-gray-200 bg-white"
+                                            class="divide-y divide-gray-200 dark:divide-gray-600 bg-white dark:bg-gray-700"
                                         >
                                             <Check
                                                 v-for="check in endpoint.data

@@ -20,7 +20,7 @@ class PerformEndpointCheckJob implements ShouldQueue, ShouldBeUnique
         //
     }
 
-    public function uniqid(): string
+    public function uniqueId(): string
     {
         return 'endpoint_'.$this->endpoint->id;
     }
@@ -31,14 +31,15 @@ class PerformEndpointCheckJob implements ShouldQueue, ShouldBeUnique
         try {
             $response = Http::get($this->endpoint->url());
             info($response->status());
-        } catch (\Exception $th) {
-            //throw $th;
-        }
 
-        $this->endpoint->checks()->create([
-            'response_code' => $response->status(),
-            'response_body' => ! $response->successful() ? $response->body() : null,
-        ]);
+            $this->endpoint->checks()->create([
+                'response_code' => $response->status(),
+                'response_body' => ! $response->successful() ? $response->body() : null,
+            ]);
+        } catch (\Exception $th) {
+            // Log the exception
+            // throw $th;
+        }
 
         // update endpoint with the new next_check
         $this->endpoint->update([

@@ -24,7 +24,6 @@ class Endpoint extends Model
      **/
     public function url(): string
     {
-
         return $this->site->url().$this->location;
     }
 
@@ -34,7 +33,7 @@ class Endpoint extends Model
             return null;
         }
         // total successful checks / total number of checks * 100
-        return number_format(($this->successful_checks_count / $this->checks()->count()) * 100, 2);
+        return number_format(($this->successful_checks_count / $this->checks->count()) * 100, 2);
     }
 
     public function site(): BelongsTo

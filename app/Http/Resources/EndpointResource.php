@@ -17,7 +17,7 @@ class EndpointResource extends JsonResource
     {
         return [
             'id'                => $this->id,
-            'location'          => $this->location,
+            'location'          => str($this->location)->limit(60),
             'frequency_label'   => EndpointFrequencyEnums::from($this->frequency)->label(),
             'frequency_value'   => EndpointFrequencyEnums::from($this->frequency)->value,
             'latest_check'      => CheckResource::make($this->check),

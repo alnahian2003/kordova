@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
             'endpointFrequencies' => EndpointFrequency::collection(EndpointFrequencyEnums::cases()),
-            'sites'               => SiteResource::collection($request->user()?->sites()->latest()->get()),
+            'sites'               => $request->user() ? SiteResource::collection($request->user()->sites()->latest()->get()) : null,
         ]);
     }
 }

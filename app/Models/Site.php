@@ -17,7 +17,7 @@ class Site extends Model
 
     public function url()
     {
-        return $this->scheme . '://' . $this->domain;
+        return $this->scheme.'://'.$this->domain;
     }
 
     public function user(): BelongsTo

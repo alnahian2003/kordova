@@ -4,6 +4,7 @@ namespace App\Enums;
 
 enum EndpointFrequencyEnums: int
 {
+        // case TEN_SECONDS = 10; // testing purpose only
     case ONE_MINUTE = 60;
     case THREE_MINUTE = 3 * 60;
     case FIVE_MINUTE = 5 * 60;
@@ -15,6 +16,7 @@ enum EndpointFrequencyEnums: int
     public function label(): string
     {
         return match ($this) {
+            // self::TEN_SECONDS => '10 seconds', // testing purpose only
             self::ONE_MINUTE => '1 minute',
             self::THREE_MINUTE => '3 minutes',
             self::FIVE_MINUTE => '5 minutes',

@@ -14,19 +14,16 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request, Site $site)
     {
-        // Set currently accessed site to default
         $site->update(['default' => true]);
 
-        // If the site does not exist
-        if (!$site->exists) {
-            // Retrieve the default site belonging to the authenticated user, if available
+        if (! $site->exists) {
             $site = $request->user()->sites()
-                ->orderBy('updated_at', 'desc')
-                ->whereDefault(true)
+                ->where('default', true)
                 ->first()
-                // If no default site is found, retrieve the latest site belonging to the user
                 ?? $request->user()->site;
         }
+
+        $site->load('endpoints.site', 'endpoints.checks', 'endpoints.check');
 
         return inertia()->render('Dashboard', [
             'site'      => $site ? SiteResource::make($site) : null,
