@@ -15,12 +15,12 @@ class CheckResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'id'            => $this->id,
             'response_code' => $this->response_code,
             'response_body' => $this->response_body,
             'is_successful' => $this->isSuccessful(),
-            'status_text' => $this->statusText(),
-            'created_at' => DateTimeResource::make($this->created_at),
+            'status_text'   => $this->statusText(),
+            'created_at'    => DateTimeResource::make($this->created_at),
         ];
     }
 }

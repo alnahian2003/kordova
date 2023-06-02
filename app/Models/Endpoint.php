@@ -23,7 +23,7 @@ class Endpoint extends Model
     public function url(): string
     {
 
-        return $this->site->url() . $this->location;
+        return $this->site->url().$this->location;
     }
 
     public function site(): BelongsTo
@@ -35,7 +35,6 @@ class Endpoint extends Model
     {
         return $this->hasMany(Check::class);
     }
-
 
     public function check(): HasOne
     {

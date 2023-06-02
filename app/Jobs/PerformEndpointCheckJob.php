@@ -30,7 +30,7 @@ class PerformEndpointCheckJob
 
         $this->endpoint->checks()->create([
             'response_code' => $response->status(),
-            'response_body' => !$response->successful() ? $response->body() : null,
+            'response_body' => ! $response->successful() ? $response->body() : null,
         ]);
 
         // update endpoint with the new next_check
