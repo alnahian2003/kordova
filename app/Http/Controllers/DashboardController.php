@@ -24,8 +24,8 @@ class DashboardController extends Controller
                 ->orderBy('updated_at', 'desc')
                 ->whereDefault(true)
                 ->first()
-                // If no default site is found, retrieve the first site belonging to the user
-                ?? $request->user()->sites()->first();
+                // If no default site is found, retrieve the latest site belonging to the user
+                ?? $request->user()->site;
         }
 
         return inertia()->render('Dashboard', [

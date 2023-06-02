@@ -6,8 +6,9 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import DangerButton from "@/Components/DangerButton.vue";
 
-import { Head, usePage, useForm } from "@inertiajs/vue3";
+import { Head, usePage, useForm, router } from "@inertiajs/vue3";
 
 const props = defineProps({
     site: Object,
@@ -27,6 +28,14 @@ const storeEndpoint = () => {
         preserveScroll: true,
         onSuccess: () => {
             endpointForm.reset();
+        },
+    });
+};
+
+const deleteSite = () => {
+    router.delete(`/sites/${props.site.data.id}`, {
+        onBefore: () => {
+            return confirm("Oh, really?");
         },
     });
 };
@@ -183,6 +192,10 @@ const storeEndpoint = () => {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="mt-8">
+                    <DangerButton @click="deleteSite">Delete Site</DangerButton>
                 </div>
             </div>
         </div>

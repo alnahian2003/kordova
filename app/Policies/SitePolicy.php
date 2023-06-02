@@ -11,4 +11,9 @@ class SitePolicy
     {
         return $user->id === $site->user_id;
     }
+
+    public function destroy(User $user, Site $site)
+    {
+        return $user->id === $site->user_id;
+    }
 }
