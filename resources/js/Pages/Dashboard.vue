@@ -7,6 +7,7 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import DangerButton from "@/Components/DangerButton.vue";
+import Stats from "@/Components/Stats.vue";
 
 import { Head, usePage, useForm, router } from "@inertiajs/vue3";
 
@@ -14,6 +15,7 @@ const props = defineProps({
     site: Object,
     sites: Object,
     endpoints: Object,
+    stats: Object,
 });
 
 const page = usePage();
@@ -65,6 +67,7 @@ const deleteSite = () => {
                 </template>
 
                 <template v-else>
+                    <Stats :stats="stats" />
                     <h2
                         class="text-lg font-semibold text-gray-700 dark:text-gray-300 leading-tight"
                     >
