@@ -30,6 +30,7 @@ const ShowResponseBodyModal = ref(false);
     </tr>
 
     <VueFinalModal
+        v-if="check.response_body"
         v-model="ShowResponseBodyModal"
         classes="flex justify-center items-center pt-16 mx-4 backdrop-blur"
         content-class="relative max-h-full rounded bg-white dark:bg-gray-800 dark:text-gray-100 w-full max-w-2xl p-4 md:p-6 space-y-4"
@@ -43,7 +44,7 @@ const ShowResponseBodyModal = ref(false);
         </h2>
         <textarea
             class="w-full block rounded border border-gray-300 outline-none dark:bg-gray-600 dark:text-gray-200"
-            rows="20"
+            rows="10"
             :value="check.response_body"
             readonly
         ></textarea>
