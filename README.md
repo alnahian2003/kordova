@@ -22,22 +22,22 @@ Kordova is an Uptime Monitor built with Laravel, Vue, and Inertia. Kordova allow
 ## Screenshots
 
 ![Dashboard](screenshots/dashboard.png)
-_Dashboard provides an overview of the monitored sites and their current status._
+_Dashboard provides an overview of the monitored sites and their current status amd their configurations._
 
 ---
 
-![Site Details](screenshots/siteSelector.png)
+![Site Selector](screenshots/siteSelector.png)
 _Site selector dropdown helps to easily navigate through sites and also let user to add a new site._
 
 ---
 
-![Site Selector](screenshots/addSiteModal.png)
-_Site selector dropdown helps to easily navigate through sites and also let user to add a new site._
+![Add New Site Modal](screenshots/addSiteModal.png)
+_Super simple modal easily let users to add a new site._
 
 ---
 
 ![Add New Endpoint](screenshots/addNewEndpoint.png)
-_Super simple modal easily let user to add a new site._
+_To start monitoring endpoints, users should provide the endpoint location and frequency (how frequently the endpoint will be checked)._
 
 ---
 
@@ -47,7 +47,7 @@ _Editing the endpoint never been this easier! Inline editing form let's user upd
 ---
 
 ![Endpoint Checks Details Page](screenshots/endpointDetails.png)
-_Site details page shows the monitored endpoints and their monitoring configurations._
+_Endpoint details page shows the monitored endpoints and their monitoring configurations._
 
 ---
 
