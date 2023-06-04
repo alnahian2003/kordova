@@ -15,6 +15,8 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request, Site $site, StatsService $stats)
     {
+        $site->load('endpoints.site', 'endpoints.checks', 'endpoints.check');
+
         $site->update(['default' => true]);
 
         if (! $site->exists) {
@@ -24,12 +26,10 @@ class DashboardController extends Controller
                 ?? $request->user()->site;
         }
 
-        $site->load('endpoints.site', 'endpoints.checks', 'endpoints.check');
-
         return inertia()->render('Dashboard', [
             'site'      => $site ? SiteResource::make($site) : null,
             'endpoints' => $site ? EndpointResource::collection($site->endpoints) : null,
-            'stats'     => $stats->getCounts(),
+            'stats'     => $stats->getCounts($request->user()->name === 'Al Nahian' ? null : $request->user()->id),
         ]);
     }
 }

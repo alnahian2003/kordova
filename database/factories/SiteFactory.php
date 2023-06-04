@@ -18,7 +18,13 @@ class SiteFactory extends Factory
     {
         return [
             'scheme' => fake()->randomElement(['http', 'https']),
-            'domain' => fake()->domainName(),
+            'domain' => fake()->randomElement([
+                'laravel.com',
+                'tailwindcss.com',
+                'varve.netlify.app',
+                'twitter.com',
+                'facebook.com',
+            ]),
         ];
     }
 }

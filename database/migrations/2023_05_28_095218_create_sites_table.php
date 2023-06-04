@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('scheme'); // http / https
             $table->string('domain'); // example.com
             $table->boolean('default')->default(false);
+            $table->json('notification_emails')->nullable()->default('[]');
             $table->timestamps();
         });
     }
